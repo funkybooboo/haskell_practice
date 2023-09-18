@@ -146,6 +146,7 @@ Hoogle
 
 - Higher order functions
 foo :: (a -> b) -> c
+        ^ function
 fn :: Num a => a -> a -> a
 fn x y = x + y
 bar = foo fn
@@ -164,6 +165,8 @@ map fn (x:xs) = fn x : map fn xs
 - Factorio in programing!
 
 zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith (+) xs ys
+    -    ^ pair-wise sums
 
 filter :: (a -> Bool) -> [a] -> [a]
-
+filter even xs
