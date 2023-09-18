@@ -1,0 +1,122 @@
+--Haskell Syntax
+-Haskell only knows functions!* No variables
+func x y = <expr>
+
+- function-name arguments = body
+-function that squares a number
+square x = x * x
+-spaces to separate function name and arguments
+
+magnitude x y = sqrt (square x + square y)
+-use () to group outputs for inputs
+
+-Types
+func :: x -> y -> z
+- func-name :: argumentType1 -> argumentType2 -> returnType
+
+square :: Integer -> Integer
+square x = x * x
+
+foo :: a -> b -> c
+- any type will do for all 3
+
+foo :: a -> a -> a
+- any type will do but they all need to be the same type
+
+foo :: a -> a -> b
+- any input type will do but the output type needs to be different
+
+-standard library
+head :: [a] -> a
+
+square :: a -> a
+square x = x * x
+- error
+- * only applies to numbers
+
+square :: Num a => a -> a
+square x = x * x
+- a is an instance of Num
+
+-Currying
+magnitude :: Integer -> Integer -> Integer
+magnitude x y = sqrt (square x + square y)
+foo = magnitude 5
+- no error!
+- because foo has become a new function with this type
+foo :: Integer -> Integer
+this has this effect on magnitude
+magnitude :: Integer -> Integer
+- as if we shaved off one of the arguments
+
+-if-else?
+foo = if <condition> then <true_expr> else <false_expr>
+-no else-if
+
+-pattern matching
+zeroToOne 0 = 1
+zeroToOne x = x
+- haskell will check all the defined functions starting from the top and once it finds a fit it will use that definition for this run
+- order in which you define functions matters
+
+-Guards
+sign x | x > 0 = 1
+       | x < 0 = -1
+       | otherwise = 0
+
+-Let-in and where
+magnitude = let
+    sqMag = square x + square y
+    in
+    sqrt sqMag
+
+magnitude = sqrt sqMag
+    where sqMag = square x + square y
+
+- Lists
+- haskell lists are linked lists
+
+somelist :: [Integer]
+somelist = [1, 2, 3]
+somelist = 1 : (2 : (3 : []))
+- cons = :
+- cons link to the previous list
+- nil = []
+- nil is the empty list or end of a list
+(x:xs)
+- x is the current item
+- xs is the remaining items
+
+- Graham Mutton's approach to recursion
+1. write down name and type
+2. write down cases
+3. define base cases
+4. define recursion cases
+5. generalize and simplify
+
+- Examples!
+
+- Factorial
+- n! = n * (n-1)!, 0! = 1
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+
+- Sum a list of numbers
+sum :: Num a => [a] -> a
+sum [] = 0
+sum (x:xs) = x + sum xs
+
+- Take first N elements from a list
+take :: Integer -> [a] -> [a]
+take 0 [] = []
+take n [] = []
+take 0 (x:xs) = []
+take n (x:xs) = x : take (n - 1) xs
+-using step 5 of recursion
+take :: Integer -> [a] -> [a]
+take 0 _ = []
+take _ [] = []
+take n (x:xs) = x : take (n - 1) xs
+- because we aren't using _ in our definition _ is a good name
+
