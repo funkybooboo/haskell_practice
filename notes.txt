@@ -161,6 +161,8 @@ map :: (a -> b) -> [a] -> [b]
 map fn [] = []
 map fn (x:xs) = fn x : map fn xs
 - mapping a function onto a list
+map (+1) [1,2,3]
+[2,3,4]
 
 - Factorio in programing!
 
