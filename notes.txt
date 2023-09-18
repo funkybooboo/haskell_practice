@@ -113,10 +113,57 @@ take 0 [] = []
 take n [] = []
 take 0 (x:xs) = []
 take n (x:xs) = x : take (n - 1) xs
--using step 5 of recursion
+-using step 5 of recursion you can get it to look like this
 take :: Integer -> [a] -> [a]
 take 0 _ = []
 take _ [] = []
 take n (x:xs) = x : take (n - 1) xs
 - because we aren't using _ in our definition _ is a good name
+
+- Haskell using lazy evaluation
+firstSquares :: Num a => a -> [a] -> [a]
+firstSquares n xs = take n (squareAll xs)
+- haskell doesn't square everything in xs. It only squares what is needed.
+
+naturals = [1..]
+- this function is infinite but haskell only evaluates what is needed
+- this is a more robust way to write it
+naturals = naturalsFrom 1
+naturalsFrom x = x : naturalsFrom (x + 1)
+
+- List Comprehension
+[<expr> | x <- xs]
+
+squareAll :: Num a => [a] -> [a]
+squareAll xs [x * x | x <- xs]
+
+
+- Built-in functions
+base
+- common functions, types, etc.
+Hoogle
+- search by: function name, function type, module
+
+- Higher order functions
+foo :: (a -> b) -> c
+fn :: Num a => a -> a -> a
+fn x y = x + y
+bar = foo fn
+
+- Lambda notation
+foo :: (a -> b) -> c
+bar = foo (\x y -> x + y)
+           ^ Anonymous function
+
+- the most common base function
+map :: (a -> b) -> [a] -> [b]
+map fn [] = []
+map fn (x:xs) = fn x : map fn xs
+- mapping a function onto a list
+
+- Factorio in programing!
+
+zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+
+filter :: (a -> Bool) -> [a] -> [a]
 
