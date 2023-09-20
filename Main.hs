@@ -46,3 +46,6 @@ module Utils where
   sorted :: [Num] -> Bool
   sorted [] = True
   sorted (x:xs) = check x xs
+
+  oddNumbers :: Integer -> [Integer]
+  oddNumbers n = [ x | x <- [1..n], (mod x 2) == 1]
